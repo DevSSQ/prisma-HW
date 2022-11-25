@@ -1,15 +1,20 @@
-import express from 'express';
-import movieRouter from './routes/movie.route';
-import studentRouter from './routes/student.route';
-import bankRouter from './routes/bank.route';
+import express from 'express'
+import MovieRouter from './routes/movie.route'
 
+
+import 'dotenv/config'
+import { connectDB } from './config/db'
 const app = express();
+
+//config
+connectDB();
+
 app.use(express.json());
+app.use('/movie', MovieRouter)
+ const api_key = process.env.PORT
+console.log(api_key)
 
-app.use('/api/v1/movie', movieRouter);
-app.use('/api/v1/student', studentRouter);
-app.use('/api/v1/customer', bankRouter);
 
-app.listen(5000, () => {
-    console.log('Server is running in port 5000');
-  });
+app.listen(api_key, () => {
+    console.log(`Server is running on port ${api_key}`)
+});
